@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,21 +16,27 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+
+
+
+Route::get('/Contact', function () {
+    return inertia('Contact');
+
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+Route::get('/About', function () {
+    return inertia('About');
+
 });
+
+
+// CRUD
+Route::get('/', [EventController::class, 'EventsList'])->name('events.list');
+Route::get('/event/{event}', [EventController::class, 'getEvent'])->name('event.get');
+Route::post('/add-event', [EventController::class, 'store'])->name('event.store');
+Route::delete('/delete-event/{event}', [EventController::class, 'deleteEvent'])->name('event.delete');
+Route::post('/update-event/{event}', [EventController::class, 'updateEvent'])->name('event.update');
+Route::post('/events-search', [EventController::class, 'compareDates'])->name('events.search');
+
+
+

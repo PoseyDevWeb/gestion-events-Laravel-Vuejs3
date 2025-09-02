@@ -68,3 +68,15 @@ npm run dev
 ```
 php artisan serve
 ```
+
+## ▶️ Utilisation
+
+**Accédez à l’interface pour** :
+
+**Ajouter/modifier/supprimer un événement via la modal**
+
+**Consulter la liste des événements à venir**
+
+**Filtrer les événements avec le component dateRangePicker**
+
+**L’intervalle sélectionné par le picker est appliqué à la liste et au calendrier via un scope Laravel côté backend**
